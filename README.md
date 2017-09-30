@@ -1,6 +1,5 @@
-# Aresskit - v1.0 (beta) for Windows 7+
+# Aresskit - (Stable) v1.1
 ### -- Fully featured Remote Administration Tool (RAT)
-### Build v1.0 (beta) -- By @BlackVikingPro
 
 ***
 
