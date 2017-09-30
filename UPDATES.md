@@ -1,7 +1,5 @@
 # Aresskit -- Update Log
 
-***
-
 ## Update v1.1
  * Fixed some bugs
  * Updated screenshot capture tool
