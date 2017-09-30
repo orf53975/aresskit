@@ -1,6 +1,6 @@
 # Aresskit - (Stable) v1.1
 ### -- Fully featured Remote Administration Tool (RAT)
-**Read the [Aresskit WiKi**](https://github.com/BlackVikingPro/aresskit/wiki)
+**Read the** [**Aresskit WiKi**](https://github.com/BlackVikingPro/aresskit/wiki)
 
 ***
 
