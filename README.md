@@ -28,6 +28,15 @@ execute administrative tasks that vary in complexity and strength.
 
 ***
 
+### Build Requirements:
+Some of these may not be required, but they do help in development
+ * Visual Studio 2017
+ * .NET Framework 4
+ * Costura.Fody
+	* `PM> Install-Package Costura.Fody`
+ * Json.NET
+	* `PM> Install-Package Newtonsoft.Json`
+
 ### How Aresskit works:
 The software has a simple concept, yet a complicated design. The idea of Aresskit is <br />
 to be deployed and executed on a target machine, then to send a specially constructed <br />
