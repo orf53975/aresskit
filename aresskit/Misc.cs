@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -55,6 +56,11 @@ namespace aresskit
         public static string GetFirst(string str, int maxLength)
         {
             return str.Substring(0, Math.Min(str.Length, maxLength));
+        }
+
+        public static void Log(string logMessage, TextWriter w)
+        {
+            w.Write(logMessage);
         }
     }
 }
