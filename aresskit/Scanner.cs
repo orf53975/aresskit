@@ -62,7 +62,7 @@ namespace aresskit
             var local = NetworkInterface.GetAllNetworkInterfaces().Where(i => i.Name == "Wireless LAN adapter Wi-Fi 2").FirstOrDefault();
             IPHostEntry hostEntry = Dns.GetHostEntry(Environment.MachineName);
             string lanIP = local != null ? local.GetIPProperties().UnicastAddresses[0].Address.ToString() : hostEntry.AddressList[hostEntry.AddressList.Length - 1].ToString();
-            string _lanIP = Toolkit.GetFirst(lanIP, (lanIP.LastIndexOf('.') + 1));
+            string _lanIP = Misc.GetFirst(lanIP, (lanIP.LastIndexOf('.') + 1));
 
             List<string> range = new List<string>();
             for (int x = 1; x < 256; x++)

