@@ -30,11 +30,11 @@ execute administrative tasks that vary in complexity and strength.
 
 ### Build Requirements:
 Some of these may not be required, but they do help in development
- * Visual Studio 2017
- * .NET Framework 4
- * Costura.Fody
+ * [Visual Studio 2017](https://www.visualstudio.com/downloads/)
+ * [.NET Framework 4](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
+ * [Costura.Fody](https://github.com/Fody/Costura)
 	* `PM> Install-Package Costura.Fody`
- * Json.NET
+ * [Json.NET](https://www.newtonsoft.com/json)
 	* `PM> Install-Package Newtonsoft.Json`
 
 ### How Aresskit works:
