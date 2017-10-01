@@ -5,7 +5,12 @@
  * Created more categories (Network, Misc)
  * Added GetPublicIPAddress
  * Added ability to hide/show console
-
+	### Update v1.2.1
+	* Code adjustments
+	* Fixed keylogger
+	* Fixed minor bugs
+	* Erased useless data
+  
 ## Update v1.1
  * Fixed some bugs
  * Updated screenshot capture tool
