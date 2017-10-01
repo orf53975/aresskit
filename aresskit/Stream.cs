@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using Newtonsoft.Json;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
@@ -15,7 +16,8 @@ namespace aresskit
             myImage.Save(imagePath, ImageFormat.Png);
 
             // Upload file
-            dynamic json = System.Web.Helpers.Json.Decode(FileHandler.uploadFile(imagePath, "http://uploads.im/api?upload"));
+            //FileHandler.uploadFile(imagePath, "http://uploads.im/api?upload")
+            dynamic json = JsonConvert.DeserializeObject(FileHandler.uploadFile(imagePath, "http://uploads.im/api?upload"));
             return json.data.img_url;
         }
 

