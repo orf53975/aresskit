@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace aresskit
 {
@@ -7,7 +8,7 @@ namespace aresskit
     {
         public static byte[] byteCode(string contents)
         {
-            return System.Text.Encoding.ASCII.GetBytes(contents);
+            return Encoding.ASCII.GetBytes(contents);
         }
 
         public static string ShowMethods(Type type)

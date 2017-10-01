@@ -7,7 +7,7 @@ namespace aresskit
     // Thanks to: http://stackoverflow.com/a/18870847/5925502
     class Stream
     {
-        public static string captureScreenshot()
+        public static string CaptureScreenshot()
         {
             string imagePath = default(string);
             Bitmap myImage = Stream.Capture(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);

