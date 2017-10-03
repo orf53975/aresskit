@@ -30,7 +30,7 @@ namespace aresskit
                     if (parameterDescriptions == "")
                         helpMenu += type.Name + "::" + method.Name + "\n";
                     else
-                        helpMenu += type.Name + "::" + method.Name + "(" + parameterDescriptions + ")\n";
+                        helpMenu += type.Name + "::" + method.Name + " (" + parameterDescriptions + ")\n";
                 }
             }
             return helpMenu;

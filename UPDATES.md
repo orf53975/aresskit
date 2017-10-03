@@ -5,6 +5,10 @@
  * Created more categories (Network, Misc)
  * Added GetPublicIPAddress
  * Added ability to hide/show console
+	### Update v1.2.2
+	* Added gitignore
+	* Added build scripts
+	* Added implementation for Configiuration files (ini)
 	### Update v1.2.1
 	* Code adjustments
 	* Fixed keylogger

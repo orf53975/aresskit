@@ -1,4 +1,4 @@
-# Aresskit - (Stable) v1.2.1
+# Aresskit - (Stable) v1.2.2
 ### -- Fully featured Remote Administration Tool (RAT)
 **Read the** [**Aresskit WiKi**](https://github.com/BlackVikingPro/aresskit/wiki)
 
@@ -47,17 +47,8 @@ will be able to pipe commands back to the infected machine, in which the specifi
 commands are programmed into the source code for ease of access/use. 
 
 ### How to build/deploy Aresskit
-So, most of the pre-built functions require hardcoded variables to operate cleanly. <br />
-The `Program.cs` file is the main one that contains all required configuration and such. <br />
-The hardcoded elements that will need configuration are as follows on `line 10` in `Program.cs`
-
-```csharp
-const string server = "localhost"; // Server to connect back to
-const int port = 9000; // Port to communicate through
-const bool hideConsole = true; // Hide console window (recommended)
-```
-After these variables are configured to meet your requirements, you can simply build the <br />
-program using Visual Studio. Afterwards, just get your `aresskit.exe` and deploy!
+1. Modify variables found at the top of `Program.cs` to suite your needs
+2. To build the software, simply execute `build-release.bat` and publish the exe.
 
 ### How to use Aresskit
 In order to use Aresskit, you will need a VPS or at least some other port listener. <br />
